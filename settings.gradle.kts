@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "words"
 include(":app")
+include(":features:add_word")
