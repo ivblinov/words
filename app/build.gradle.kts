@@ -48,6 +48,9 @@ android {
 
 dependencies {
 
+    // project:
+    implementation(project(":features:add_word"))
+
     // core:
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
