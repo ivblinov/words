@@ -1,0 +1,33 @@
+# gradle-файлы:
+.gradle/
+.kotlin/
+/**/build/
+
+# локальные файлы:
+local.properties
+
+# ide-файлы:
+*.iml
+.idea/*
+
+# отменяем общие файлы в .idea/:
+!/.idea/misc.xml
+!/.idea/vcs.xml
+!/.idea/compiler.xml
+!/.idea/gradle.xml
+!/.idea/codeStyles/
+!/.idea/runConfigurations/
+
+# логи:
+*.log
+
+# файлы ОС:
+.DS_Store
+Thumbs.db
+
+# скриншоты из AndroidStudio:
+/captures/
+
+# файлы для подписи релиза:
+*.jks
+*.keystore
