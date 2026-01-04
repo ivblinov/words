@@ -48,6 +48,9 @@ dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.bundles.compose)
 
+    // navigation:
+    implementation(libs.navigation)
+
     // test:
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
