@@ -2,12 +2,12 @@ package io.github.ivblinov.words.features.add_word.navigation
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import io.github.ivblinov.words.features.add_word.presentation.AddWordScreen
+import io.github.ivblinov.words.features.add_word.presentation.add_word.AddWordScreen
 
-const val addWordRoot = "add_word_root"
+const val addWordRoute = "add_word_route"
 
 fun NavGraphBuilder.addWordScreen() {
-    composable(route = addWordRoot) {
+    composable(route = addWordRoute) {
         AddWordScreen()
     }
 }
