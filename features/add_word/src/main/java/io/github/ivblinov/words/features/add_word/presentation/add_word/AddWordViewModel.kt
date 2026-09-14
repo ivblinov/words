@@ -3,6 +3,9 @@ package io.github.ivblinov.words.features.add_word.presentation.add_word
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.github.ivblinov.words.domain.model.WordModelPreview
+import io.github.ivblinov.words.domain.usecase.GetWordListUseCase
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -10,12 +13,15 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AddWordViewModel @Inject constructor() : ViewModel() {
+class AddWordViewModel @Inject constructor(
+    private val getWordListUseCase: GetWordListUseCase
+) : ViewModel() {
 
     private val _uiState = MutableStateFlow<AddWordUiState>(AddWordUiState.Loading)
     val uiState: StateFlow<AddWordUiState> = _uiState.asStateFlow()
 
-    private var allWords: List<String> = emptyList()
+//    private var allWords: List<String> = listOf()
+    private var allWords: List<WordModelPreview> = listOf()
 
     init {
         loadInitialWords()
@@ -28,15 +34,16 @@ class AddWordViewModel @Inject constructor() : ViewModel() {
     }
 
     private fun loadInitialWords() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
-                allWords = listOf("Apple", "Banana", "Orange", "Cherry", "Plum")
+                allWords = getWordListUseCase()
+//                allWords = listOf("Apple", "Banana", "Orange", "Cherry", "Plum")
                 _uiState.value = AddWordUiState.Success(
-                    words = allWords,
+                    wordList = allWords,
                     searchQuery = ""
                 )
-            } catch (e: Exception) {
-                _uiState.value = AddWordUiState.Error(e.message ?: "Unknown error")
+            } catch (e: Throwable) {
+                _uiState.value = AddWordUiState.Error(e)
             }
         }
     }
@@ -47,11 +54,12 @@ class AddWordViewModel @Inject constructor() : ViewModel() {
             val filteredList = if (query.isBlank()) {
                 allWords
             } else {
-                allWords.filter { it.contains(query, ignoreCase = true) }
+                allWords.filter { it.engName.contains(query, ignoreCase = true) }
+//                allWords.filter { it.contains(query, ignoreCase = true) }
             }
 
             _uiState.value = currentState.copy(
-                words = filteredList,
+                wordList = filteredList,
                 searchQuery = query
             )
         }

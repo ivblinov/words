@@ -23,3 +23,6 @@ rootProject.name = "words"
 include(":app")
 include(":features:add_word")
 include(":core:resources")
+include(":core:database")
+include(":data")
+include(":domain")

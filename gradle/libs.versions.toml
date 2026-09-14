@@ -1,16 +1,23 @@
 [versions]
-agp = "8.11.2"
-kotlin = "2.2.20"
-ksp = "2.3.4"
+agp = "9.0.1"
+javaxInject = "1"
+kotlin = "2.3.10"
+ksp = "2.3.5"
+coroutines = "1.10.2"
 coreKtx = "1.17.0"
 lifecycleRuntimeKtx = "2.10.0"
 junit = "4.13.2"
 junitVersion = "1.3.0"
-activityCompose = "1.12.2"
-composeBom = "2025.12.01"
-navigation = "2.9.6"
-hilt = "2.57.2"
+activityCompose = "1.12.4"
+composeBom = "2026.02.00"
+navigation = "2.9.7"
+hilt = "2.59.1"
 hiltNavigationCompose = "1.3.0"
+jetbrainsKotlinJvm = "2.3.10"
+room = "2.8.4"
+espressoCore = "3.7.0"
+appcompat = "1.7.1"
+material = "1.14.0"
 
 [libraries]
 
@@ -41,15 +48,28 @@ hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
 hilt-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
 
+# room:
+room = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+
+# inject:
+javax-inject = { group = "javax.inject", name = "javax.inject", version.ref = "javaxInject" }
+coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
 
 [bundles]
 compose = ["androidx-ui", "androidx-ui-graphics", "androidx-ui-tooling-preview", "androidx-material3"]
 debug-compose = ["androidx-ui-tooling", "androidx-ui-test-manifest"]
 hilt = ["hilt", "hilt-compose"]
+room = ["room", "room-ktx"]
