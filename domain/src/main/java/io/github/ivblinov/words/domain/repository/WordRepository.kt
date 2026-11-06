@@ -1,5 +1,6 @@
 package io.github.ivblinov.words.domain.repository
 
+import io.github.ivblinov.words.domain.model.WordModel
 import io.github.ivblinov.words.domain.model.WordModelPreview
 import kotlinx.coroutines.flow.Flow
 
@@ -16,9 +17,9 @@ interface WordRepository {
      * Использует операцию Upsert (вставка или обновление).
      *
      * @param wordModel Доменная модель словарного слова.
-     * @return Result с результатом операции (успех или исключение).
+     * @return Long - id сохраненной записи.
      */
-//    suspend fun saveWord(wordModel: WordModel): Result<Unit>
+    suspend fun saveWord(wordModel: WordModel): Long
 
     /**
      * Предоставляет список кратких данных о словарных словах для отображения.
@@ -26,5 +27,5 @@ interface WordRepository {
      * @return список словарных слов только на английском [WordModelPreview]
      * Сортировка по алфавиту (А-Я).
      */
-    fun getWordList(): List<WordModelPreview>
+    fun getWordList(): Flow<List<WordModelPreview>>
 }

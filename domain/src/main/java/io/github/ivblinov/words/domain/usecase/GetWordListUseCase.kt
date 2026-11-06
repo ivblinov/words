@@ -11,5 +11,5 @@ class GetWordListUseCase @Inject constructor(
 ) {
 
     /** Предоставляет список словарных слов [WordModelPreview]. */
-    operator fun invoke(): List<WordModelPreview> = repository.getWordList()
+    operator fun invoke(): Flow<List<WordModelPreview>> = repository.getWordList()
 }

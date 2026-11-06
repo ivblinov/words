@@ -1,4 +1,4 @@
-package io.github.ivblinov.words.ui.theme
+package io.github.ivblinov.words.core.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

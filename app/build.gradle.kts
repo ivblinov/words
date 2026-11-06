@@ -52,7 +52,7 @@ dependencies {
     // project:
     implementation(project(":core:database"))
     implementation(project(":core:resources"))
-//    implementation(project(":core:ui"))
+    implementation(project(":core:ui"))
     implementation(project(":data"))
     implementation(project(":domain"))
     implementation(project(":features:add_word"))

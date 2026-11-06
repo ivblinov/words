@@ -1,23 +1,29 @@
 package io.github.ivblinov.words.data.repository_impl
 
 import io.github.ivblinov.words.data.local.dao.WordDao
-import io.github.ivblinov.words.data.local.db.AppDatabase
 import io.github.ivblinov.words.data.local.entity.WordEntity
+import io.github.ivblinov.words.data.mapper.toData
 import io.github.ivblinov.words.data.mapper.toPreview
+import io.github.ivblinov.words.domain.model.WordModel
 import io.github.ivblinov.words.domain.model.WordModelPreview
 import io.github.ivblinov.words.domain.repository.WordRepository
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 /** Реализация репозитория словарных слов для работы с базой данных. */
 class WordRepositoryImpl @Inject constructor(
-    private val db: AppDatabase,
     private val wordDao: WordDao,
 ) : WordRepository {
 
-//    override suspend fun saveWord(wordModel: WordModel): Result<Unit> {
-//        Log.d(TAG, "saveWord: ")
-//    }
+    /**
+     * Реализация сохранения словарного слова.
+     *
+     * Преобразует данные из [WordModel] (слой домена) в [WordEntity] (слой данных).
+     */
+    override suspend fun saveWord(wordModel: WordModel): Long {
+        return wordDao.upsert(wordModel.toData())
+    }
 
     /**
      * Реализация получения потока словарных слов.
@@ -26,9 +32,11 @@ class WordRepositoryImpl @Inject constructor(
      * с помощью операторов [map]. Благодаря реактивности Room, любые изменения в таблице
      * 'word' будут автоматически вызывать повторную эмиссию обновленного списка.
      */
-    override fun getWordList(): List<WordModelPreview> {
+    override fun getWordList(): Flow<List<WordModelPreview>> {
         return wordDao.getWordList().map { entities ->
-            entities.toPreview()
+            entities.map { entity ->
+                entity.toPreview()
+            }
         }
     }
 }

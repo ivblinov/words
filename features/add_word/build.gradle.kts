@@ -43,6 +43,7 @@ dependencies {
 
     // project:
     implementation(project(":core:resources"))
+    implementation(project(":core:ui"))
     implementation(project(":domain"))
 
     // core:
