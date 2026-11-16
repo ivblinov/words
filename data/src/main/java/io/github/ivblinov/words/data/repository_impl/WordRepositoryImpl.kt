@@ -3,6 +3,7 @@ package io.github.ivblinov.words.data.repository_impl
 import io.github.ivblinov.words.data.local.dao.WordDao
 import io.github.ivblinov.words.data.local.entity.WordEntity
 import io.github.ivblinov.words.data.mapper.toData
+import io.github.ivblinov.words.data.mapper.toDomain
 import io.github.ivblinov.words.data.mapper.toPreview
 import io.github.ivblinov.words.domain.model.WordModel
 import io.github.ivblinov.words.domain.model.WordModelPreview
@@ -38,5 +39,28 @@ class WordRepositoryImpl @Inject constructor(
                 entity.toPreview()
             }
         }
+    }
+
+    /**
+     * Реализация получения словарного слова по id.
+     *
+     * Трансформирует данные из [WordEntity] (слой данных) в [WordModel] (слой домена)
+     * с помощью оператора [map].
+     *
+     * @param wordId id слова в базе данных.
+     */
+    override fun getWordById(wordId: Long): Flow<WordModel?> {
+        return wordDao.getWordById(wordId).map { wordEntity ->
+            wordEntity?.toDomain()
+        }
+    }
+
+    /**
+     * Реализация удаления словарного слова по переданному [wordId].
+     *
+     * @param wordId id слова в базе данных.
+     */
+    override suspend fun deleteById(wordId: Long): Int {
+        return wordDao.deleteById(wordId)
     }
 }

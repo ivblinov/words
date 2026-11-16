@@ -28,4 +28,18 @@ interface WordRepository {
      * Сортировка по алфавиту (А-Я).
      */
     fun getWordList(): Flow<List<WordModelPreview>>
+
+    /**
+     * Предоставляет словарное слово из базы данных по переданному [wordId].
+     *
+     * @param wordId id слова в базе данных.
+     */
+    fun getWordById(wordId: Long): Flow<WordModel?>
+
+    /**
+     * Удаляет словарное слово из базы данных по переданному [wordId].
+     *
+     * @param wordId id слова в базе данных.
+     */
+    suspend fun deleteById(wordId: Long): Int
 }

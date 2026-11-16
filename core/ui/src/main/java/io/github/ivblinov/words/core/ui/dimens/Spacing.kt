@@ -5,4 +5,5 @@ import androidx.compose.ui.unit.dp
 object Spacing {
     val fab_padding = 32.dp
     val spacer_height_between_items = 16.dp
+    val screen_padding = 16.dp
 }

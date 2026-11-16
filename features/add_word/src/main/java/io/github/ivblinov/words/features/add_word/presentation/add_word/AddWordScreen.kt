@@ -1,5 +1,6 @@
 package io.github.ivblinov.words.features.add_word.presentation.add_word
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -33,6 +34,7 @@ import androidx.navigation.NavController
 import io.github.ivblinov.words.core.resources.R
 import io.github.ivblinov.words.core.ui.components.WordFAB
 import io.github.ivblinov.words.domain.model.WordModelPreview
+import io.github.ivblinov.words.features.add_word.navigation.WordDetailRoute
 import io.github.ivblinov.words.features.add_word.navigation.translateWordRoute
 
 @Composable
@@ -47,7 +49,10 @@ fun AddWordScreen(
         onSearchQueryChange = { query ->
             viewModel.handleEvent(AddWordEvent.OnSearchQueryChanged(query))
         },
-        onAddWordClick = { navController.navigate(translateWordRoute) }
+        onAddWordClick = { navController.navigate(translateWordRoute) },
+        onWordClick = { wordId ->
+            navController.navigate(WordDetailRoute(wordId = wordId))
+        }
     )
 }
 
@@ -56,6 +61,7 @@ fun AddWordContent(
     uiState: AddWordUiState,
     onSearchQueryChange: (String) -> Unit,
     onAddWordClick: () -> Unit,
+    onWordClick: (Long) -> Unit
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -79,7 +85,8 @@ fun AddWordContent(
                 SuccessContent(
                     words = uiState.wordList,
                     searchQuery = uiState.searchQuery,
-                    onQueryChange = onSearchQueryChange
+                    onQueryChange = onSearchQueryChange,
+                    onWordClick = onWordClick
                 )
 
             AddWordUiState.Loading ->
@@ -104,10 +111,10 @@ private fun ErrorContent(message: String) {
 
 @Composable
 private fun SuccessContent(
-//    words: List<String>,
     words: List<WordModelPreview>,
     searchQuery: String,
-    onQueryChange: (String) -> Unit
+    onQueryChange: (String) -> Unit,
+    onWordClick: (Long) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -119,9 +126,12 @@ private fun SuccessContent(
             value = searchQuery,
             onValueChange = onQueryChange,
             label = { Text("Поиск слова") },
-            leadingIcon = { Icon(
-                painter = painterResource(id = R.drawable.ic_search_24px),
-                contentDescription = "Поиск") },
+            leadingIcon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_search_24px),
+                    contentDescription = "Поиск"
+                )
+            },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 16.dp)
@@ -133,7 +143,9 @@ private fun SuccessContent(
         ) {
             items(words) { word ->
                 Card(
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable { onWordClick(word.id) }
                 ) {
                     Text(
 //                        text = word,

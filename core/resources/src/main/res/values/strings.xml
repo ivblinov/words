@@ -3,7 +3,9 @@
     <string name="field_word_eng">Слово</string>
     <string name="field_word_ru">Перевод</string>
     <string name="add_word_title">Добавить слово</string>
+    <string name="word_detail_title">Детали</string>
     <string name="save_content_description">Сохранить</string>
+    <string name="delete_content_description">Удалить</string>
     <string name="add_content_description">Добавить слово для перевода</string>
 
     <!--  Ошибки  -->

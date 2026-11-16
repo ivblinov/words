@@ -39,7 +39,11 @@ sealed class WordColorScheme(
             onSurfaceVariant = AlmostBlack.copy(alpha = 0.7f),
 
             // Цвет границ (outline) для полей ввода
-            outline = DarkGreen.copy(alpha = 0.5f)
+            outline = DarkGreen.copy(alpha = 0.5f),
+
+            // Ошибки:
+            error = Color.Red,
+            onError = Color.White
         )
     )
 }
