@@ -8,7 +8,7 @@ import io.github.ivblinov.words.data.local.entity.WordEntity
 /** Основная база данных приложения [AppDatabase]. */
 @Database(
     entities = [WordEntity::class],
-    version = 1,
+    version = 2,
     exportSchema = false // Изменить на true перед релизом. Настроить папку для exportSchema в build.gradle.kts
 )
 abstract class AppDatabase : RoomDatabase() {

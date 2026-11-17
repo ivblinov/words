@@ -21,4 +21,7 @@ dependencies {
     // core:
     implementation(libs.coroutines)
     implementation(libs.javax.inject)
+
+    // test:
+    testImplementation(libs.junit)
 }

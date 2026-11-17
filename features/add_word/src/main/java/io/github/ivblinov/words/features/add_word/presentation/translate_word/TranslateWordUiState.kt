@@ -14,6 +14,6 @@ import androidx.compose.runtime.Immutable
 @Immutable
 data class TranslateWordUiState(
     val fields: Map<TranslateField, String> = emptyMap(),
-    val fieldErrors: Map<TranslateField, Int?> = emptyMap(),
+    val fieldErrors: Map<TranslateField, Int> = emptyMap(),
     val isLoading: Boolean = false
 )

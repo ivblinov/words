@@ -1,6 +1,7 @@
 package io.github.ivblinov.words.data.local.entity
 
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 
 /**
@@ -13,7 +14,15 @@ import androidx.room.PrimaryKey
  * @property engName Название словарного слова на английском языке (например, "Apple, Orange").
  * @property ruName Название словарного слова на русском языке (например, "Яблоко, Апельсин").
  */
-@Entity(tableName = "word")
+@Entity(
+    tableName = "word",
+    indices = [
+        Index(
+            value = ["engName", "ruName"],
+            unique = true
+        )
+    ]
+)
 data class WordEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,

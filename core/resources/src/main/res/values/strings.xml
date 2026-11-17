@@ -10,4 +10,5 @@
 
     <!--  Ошибки  -->
     <string name="error_empty_word">Поле "СЛОВО" не может быть пустым</string>
+    <string name="error_duplicate_translation">Такой перевод уже добавлен для этого слова</string>
 </resources>

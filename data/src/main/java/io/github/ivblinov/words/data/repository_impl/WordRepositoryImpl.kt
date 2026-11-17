@@ -23,7 +23,7 @@ class WordRepositoryImpl @Inject constructor(
      * Преобразует данные из [WordModel] (слой домена) в [WordEntity] (слой данных).
      */
     override suspend fun saveWord(wordModel: WordModel): Long {
-        return wordDao.upsert(wordModel.toData())
+        return wordDao.insert(wordModel.toData())
     }
 
     /**

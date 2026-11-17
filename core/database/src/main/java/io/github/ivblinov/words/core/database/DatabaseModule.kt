@@ -9,6 +9,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import io.github.ivblinov.words.data.local.dao.WordDao
 import io.github.ivblinov.words.data.local.db.AppDatabase
+import io.github.ivblinov.words.data.local.db.MIGRATION_1_2
 import javax.inject.Singleton
 
 
@@ -33,7 +34,9 @@ object DatabaseModule {
             context,
             AppDatabase::class.java,
             name = AppDatabase.DATABASE_NAME
-        ).build()
+        )
+            .addMigrations(MIGRATION_1_2)
+            .build()
     }
 
     @Provides
